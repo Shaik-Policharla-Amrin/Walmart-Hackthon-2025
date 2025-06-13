@@ -1,0 +1,385 @@
+import React, { useState, useEffect } from 'react';
+import { Zap, TrendingDown, ArrowRight, Play, Sparkles, Target, ShoppingCart, Factory } from 'lucide-react';
+
+interface HeroSectionProps {
+  isSupplierView?: boolean;
+}
+
+export default function HeroSection({ isSupplierView = false }: HeroSectionProps) {
+  const [animatedValue, setAnimatedValue] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  useEffect(() => {
+    // Animate the CO2 reduction percentage
+    const timer = setTimeout(() => {
+      let current = 0;
+      const target = 15;
+      const increment = target / 30;
+      
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+          setShowConfetti(true);
+          setTimeout(() => setShowConfetti(false), 2000);
+        }
+        setAnimatedValue(Math.round(current * 10) / 10);
+      }, 50);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isSupplierView) {
+    return (
+      <div className="relative bg-gradient-to-br from-[#0071ce] via-blue-700 to-[#367c2b] text-white overflow-hidden">
+        {/* Walmart Supplier Official Banner */}
+        <div className="absolute top-0 left-0 right-0 bg-[#ffc220] text-[#0071ce] py-2 z-10">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <div className="flex items-center justify-center space-x-3 text-sm font-bold">
+              <Factory className="h-4 w-4" />
+              <span>🏭 WALMART SUPPLIER PORTAL</span>
+              <span>•</span>
+              <span>PROJECT GIGATON PPA CERTIFIED</span>
+              <Factory className="h-4 w-4" />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 py-20 mt-10">
+          {/* Supplier Badge */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center space-x-4 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl px-8 py-4 animate-bounce-in">
+              <div className="flex items-center space-x-2">
+                <div className="w-12 h-12 bg-[#ffc220] rounded-full flex items-center justify-center">
+                  <Factory className="h-8 w-8 text-[#0071ce]" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold">Walmart Supplier Dashboard</div>
+                  <div className="text-sm text-blue-200">Scope 3 Emissions Tracker</div>
+                </div>
+              </div>
+              <div className="h-8 w-px bg-white bg-opacity-30"></div>
+              <div className="text-sm font-semibold">
+                <div>Project Gigaton PPA</div>
+                <div className="text-[#ffc220]">Compliance & Optimization</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Supplier Content */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight animate-slide-up">
+                  Meet Walmart's
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#ffc220] to-white">
+                    Gigaton Goals
+                  </span>
+                  <span className="block text-3xl lg:text-4xl text-blue-100">Faster & Cheaper</span>
+                </h1>
+                
+                <p className="text-xl lg:text-2xl text-blue-100 max-w-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                  AI-powered supplier compliance • Automated Scope 3 tracking • Guaranteed cost savings
+                </p>
+              </div>
+
+              {/* Supplier Value Props */}
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+                <h3 className="text-lg font-bold text-[#ffc220] mb-3">Built for Walmart Suppliers</h3>
+                <ul className="space-y-2 text-blue-100">
+                  <li className="flex items-center space-x-2">
+                    <Target className="h-4 w-4 text-[#ffc220]" />
+                    <span>Automate Scope 3 emissions reporting (Walmart's #1 requirement)</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Target className="h-4 w-4 text-[#ffc220]" />
+                    <span>Meet 2025 Gigaton targets with AI recommendations</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Target className="h-4 w-4 text-[#ffc220]" />
+                    <span>Access Walmart-approved vendors and financing</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Supplier Stats */}
+              <div className="grid grid-cols-3 gap-6 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[#ffc220]">$1.2M</div>
+                  <div className="text-sm text-blue-200">Avg. Annual Savings</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[#ffc220]">15%</div>
+                  <div className="text-sm text-blue-200">CO₂ Reduction</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[#ffc220]">6 mo</div>
+                  <div className="text-sm text-blue-200">ROI Payback</div>
+                </div>
+              </div>
+
+              {/* Supplier CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+                <button 
+                  onClick={() => {
+                    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+                  }}
+                  className="group bg-[#ffc220] text-[#0071ce] px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 button-press hover-lift flex items-center justify-center space-x-2"
+                >
+                  <Factory className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <span>View Supplier Demo</span>
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                
+                <button className="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-[#0071ce] transition-all duration-300 button-press hover-lift flex items-center justify-center space-x-2">
+                  <Sparkles className="h-5 w-5" />
+                  <span>Calculate Savings</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Supplier Dashboard Preview */}
+            <div className="relative">
+              <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-20 hover-lift">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold">Supplier Compliance Tracker</h3>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                    <span className="text-sm text-green-300">Walmart Connected</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-blue-200">Gigaton Compliance Score</span>
+                    <div className="flex items-center space-x-2">
+                      <TrendingDown className="h-4 w-4 text-green-400" />
+                      <span className="text-2xl font-bold text-green-400 animate-counter">
+                        {Math.round(animatedValue * 5 + 25)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="w-full bg-white bg-opacity-20 rounded-full h-3">
+                    <div 
+                      className="bg-gradient-to-r from-green-400 to-[#367c2b] h-3 rounded-full transition-all duration-1000 ease-out animate-chart-grow"
+                      style={{ width: `${(animatedValue * 5 + 25)}%` }}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-red-400">50K</div>
+                      <div className="text-xs text-blue-200">Current CO₂ tons</div>
+                    </div>
+                    <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-green-400">30K</div>
+                      <div className="text-xs text-blue-200">Walmart Target</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 mt-4">
+                    <div className="text-sm font-semibold text-[#ffc220] mb-2">Walmart AI Recommends:</div>
+                    <div className="flex items-center space-x-3 text-sm">
+                      <div className="w-2 h-2 bg-[#ffc220] rounded-full" />
+                      <span className="text-blue-100">Switch to Nebraska Wind Power</span>
+                      <span className="text-green-400 font-semibold ml-auto">-12%</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm">
+                      <div className="w-2 h-2 bg-[#ffc220] rounded-full" />
+                      <span className="text-blue-100">Optimize cold chain logistics</span>
+                      <span className="text-green-400 font-semibold ml-auto">$480k/yr</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Supplier Impact Footer */}
+          <div className="mt-16 text-center bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8">
+            <div className="text-lg text-blue-200 mb-2">If 500 suppliers use this platform:</div>
+            <h3 className="text-4xl font-bold text-[#ffc220] mb-2">2.1M tons CO₂ reduced = $600M saved</h3>
+            <div className="text-sm text-blue-300">Projected impact across Walmart's supplier network</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Consumer Hero Section (original)
+  return (
+    <div className="relative bg-gradient-to-br from-[#00a862] via-green-600 to-[#367c2b] text-white overflow-hidden">
+      {/* Consumer Banner */}
+      <div className="absolute top-0 left-0 right-0 bg-[#ffc220] text-[#0071ce] py-2 z-10">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="flex items-center justify-center space-x-3 text-sm font-bold">
+            <ShoppingCart className="h-4 w-4" />
+            <span>🛒 SMART SHOPPING EXPERIENCE</span>
+            <span>•</span>
+            <span>ECO-FRIENDLY REWARDS</span>
+            <ShoppingCart className="h-4 w-4" />
+          </div>
+        </div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 py-20 mt-10">
+        {/* Consumer Badge */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center space-x-4 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl px-8 py-4 animate-bounce-in">
+            <div className="flex items-center space-x-2">
+              <div className="w-12 h-12 bg-[#ffc220] rounded-full flex items-center justify-center">
+                <ShoppingCart className="h-8 w-8 text-[#0071ce]" />
+              </div>
+              <div className="text-left">
+                <div className="text-lg font-bold">EcoSmart Shopping</div>
+                <div className="text-sm text-green-200">Powered by Walmart</div>
+              </div>
+            </div>
+            <div className="h-8 w-px bg-white bg-opacity-30"></div>
+            <div className="text-sm font-semibold">
+              <div>Earn EcoPoints</div>
+              <div className="text-[#ffc220]">Save Money & Planet</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Consumer Content */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight animate-slide-up">
+                Shop Smarter
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#ffc220] to-white">
+                  Save More
+                </span>
+                <span className="block text-3xl lg:text-4xl text-green-100">Help the Planet</span>
+              </h1>
+              
+              <p className="text-xl lg:text-2xl text-green-100 max-w-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                Scan products • Get eco-friendly alternatives • Earn rewards for sustainable choices
+              </p>
+            </div>
+
+            {/* Consumer Benefits */}
+            <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+              <h3 className="text-lg font-bold text-[#ffc220] mb-3">Why Shop EcoSmart?</h3>
+              <ul className="space-y-2 text-green-100">
+                <li className="flex items-center space-x-2">
+                  <Target className="h-4 w-4 text-[#ffc220]" />
+                  <span>Instant eco-friendly product recommendations</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <Target className="h-4 w-4 text-[#ffc220]" />
+                  <span>Earn EcoPoints and Walmart Cash rewards</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <Target className="h-4 w-4 text-[#ffc220]" />
+                  <span>Track your environmental impact</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Consumer Stats */}
+            <div className="grid grid-cols-3 gap-6 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#ffc220]">2,340</div>
+                <div className="text-sm text-green-200">EcoPoints</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#ffc220]">$47</div>
+                <div className="text-sm text-green-200">CO₂ Saved</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#ffc220]">$11.50</div>
+                <div className="text-sm text-green-200">Cash Earned</div>
+              </div>
+            </div>
+
+            {/* Consumer CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+              <button 
+                onClick={() => {
+                  window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+                  setTimeout(() => {
+                    const demoButton = document.querySelector('[data-demo-button]') as HTMLButtonElement;
+                    if (demoButton) demoButton.click();
+                  }, 1000);
+                }}
+                className="group bg-[#ffc220] text-[#0071ce] px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 button-press hover-lift flex items-center justify-center space-x-2"
+              >
+                <Play className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                <span>Try Smart Shopping</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              
+              <button className="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-[#0071ce] transition-all duration-300 button-press hover-lift flex items-center justify-center space-x-2">
+                <Sparkles className="h-5 w-5" />
+                <span>View Rewards</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Consumer Dashboard Preview */}
+          <div className="relative">
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-20 hover-lift">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold">Your EcoSmart Progress</h3>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-sm text-green-300">Active</span>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-green-200">EcoPoints This Month</span>
+                  <div className="flex items-center space-x-2">
+                    <TrendingDown className="h-4 w-4 text-green-400" />
+                    <span className="text-2xl font-bold text-green-400 animate-counter">
+                      {Math.round(animatedValue * 150 + 2340)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="w-full bg-white bg-opacity-20 rounded-full h-3">
+                  <div 
+                    className="bg-gradient-to-r from-green-400 to-[#367c2b] h-3 rounded-full transition-all duration-1000 ease-out animate-chart-grow"
+                    style={{ width: `${(animatedValue / 15) * 100}%` }}
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mt-6">
+                  <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
+                    <div className="text-2xl font-bold text-[#ffc220]">47kg</div>
+                    <div className="text-xs text-green-200">CO₂ Saved</div>
+                  </div>
+                  <div className="bg-white bg-opacity-10 rounded-lg p-3 text-center">
+                    <div className="text-2xl font-bold text-green-400">$11.50</div>
+                    <div className="text-xs text-green-200">Cash Earned</div>
+                  </div>
+                </div>
+
+                <div className="space-y-2 mt-4">
+                  <div className="text-sm font-semibold text-[#ffc220] mb-2">Recent Eco Swaps:</div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <div className="w-2 h-2 bg-[#ffc220] rounded-full" />
+                    <span className="text-green-100">Chose plant-based milk</span>
+                    <span className="text-green-400 font-semibold ml-auto">+20 pts</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <div className="w-2 h-2 bg-[#ffc220] rounded-full" />
+                    <span className="text-green-100">Picked eco-friendly detergent</span>
+                    <span className="text-green-400 font-semibold ml-auto">+15 pts</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
