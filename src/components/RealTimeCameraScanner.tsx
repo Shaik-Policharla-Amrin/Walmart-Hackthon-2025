@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Camera, X, CheckCircle, AlertTriangle, Zap, Target, Scan, RefreshCw, Mic, Video, Award, ShoppingCart, TrendingDown } from 'lucide-react';
+import { Camera, X, CheckCircle, AlertTriangle, Zap, Target, Scan, RefreshCw, Mic, Video, Award, ShoppingCart, TrendingDown, QrCode } from 'lucide-react';
 import Webcam from 'react-webcam';
 import Quagga from 'quagga';
 import { Product, CartItem } from '../types/product';
@@ -224,8 +224,8 @@ export default function RealTimeCameraScanner({ onProductScanned, onClose }: Rea
             <div className="flex items-center space-x-2">
               <Camera className="h-6 w-6" />
               <div>
-                <h2 className="text-lg font-bold">EcoSmart Scanner</h2>
-                <p className="text-sm text-blue-100">Live barcode scanning</p>
+                <h2 className="text-lg font-bold">Live Scanner</h2>
+                <p className="text-sm text-blue-100">Real-time barcode scanning</p>
               </div>
             </div>
             <button 
@@ -305,6 +305,14 @@ export default function RealTimeCameraScanner({ onProductScanned, onClose }: Rea
                     isScanning ? 'bg-white animate-pulse' : 'bg-gray-500'
                   }`}></div>
                   <span>{isScanning ? 'Scanning...' : 'Initializing...'}</span>
+                </div>
+              </div>
+
+              {/* QR Code Instructions */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="bg-black bg-opacity-70 rounded-lg p-3 text-white text-center">
+                  <QrCode className="h-6 w-6 mx-auto mb-2" />
+                  <p className="text-sm">Point camera at any barcode</p>
                 </div>
               </div>
             </div>

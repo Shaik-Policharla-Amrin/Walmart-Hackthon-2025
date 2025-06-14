@@ -1,52 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { Camera, Scan, AlertTriangle, CheckCircle, RefreshCw, Mic, Zap, Video, Target, TrendingDown, ShoppingCart, Award } from 'lucide-react';
+import { Search, AlertTriangle, CheckCircle, RefreshCw, Mic, Zap, Target, TrendingDown, ShoppingCart, Award, ArrowRight } from 'lucide-react';
 import { Product, CartItem } from '../types/product';
 import { sampleProducts } from '../utils/walmart-data';
 import SwapModal from './SwapModal';
 import EcoAlert from './EcoAlert';
-import RealTimeCameraScanner from './RealTimeCameraScanner';
 
 interface ScanningViewProps {
   onProductScanned: (item: CartItem) => void;
 }
 
 export default function ScanningView({ onProductScanned }: ScanningViewProps) {
-  const [isScanning, setIsScanning] = useState(false);
-  const [lastScannedProduct, setLastScannedProduct] = useState<Product | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showSwapModal, setShowSwapModal] = useState(false);
   const [showEcoAlert, setShowEcoAlert] = useState(false);
-  const [scanAnimation, setScanAnimation] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [showRealTimeScanner, setShowRealTimeScanner] = useState(false);
-  const [demoMode, setDemoMode] = useState(false);
+  const [ecoPointsAnimation, setEcoPointsAnimation] = useState(0);
 
-  const simulateScan = () => {
-    setIsScanning(true);
-    setScanAnimation(true);
+  // 3-Step Demo Flow
+  const handleDemoSearch = () => {
+    setSearchTerm('Great Value Beef');
+    setIsSearching(true);
     
     setTimeout(() => {
-      const randomProduct = sampleProducts[Math.floor(Math.random() * sampleProducts.length)];
-      setLastScannedProduct(randomProduct);
-      setIsScanning(false);
-      setScanAnimation(false);
+      const beefProduct = sampleProducts.find(p => p.name === 'Great Value Ground Beef') || sampleProducts[0];
+      setSearchResults([beefProduct]);
+      setSelectedProduct(beefProduct);
+      setIsSearching(false);
       
-      // Check if product needs eco alert (high impact items)
-      if (randomProduct.co2e > 5) {
-        setShowEcoAlert(true);
+      // Show eco alert for high impact
+      if (beefProduct.co2e > 5) {
+        setTimeout(() => setShowEcoAlert(true), 500);
         setTimeout(() => setShowEcoAlert(false), 2500);
       }
+    }, 1000);
+  };
+
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    
+    setIsSearching(true);
+    
+    setTimeout(() => {
+      const results = sampleProducts.filter(product => 
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.brand.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+      setIsSearching(false);
       
-      // Add to cart with haptic feedback simulation
-      const cartItem: CartItem = {
-        ...randomProduct,
-        quantity: 1,
-        scannedAt: new Date()
-      };
-      onProductScanned(cartItem);
-      
-      // Show swap modal if alternatives exist and product has high impact
-      if (randomProduct.alternatives && randomProduct.alternatives.length > 0 && randomProduct.co2e > 3) {
-        setTimeout(() => setShowSwapModal(true), 600);
+      if (results.length > 0) {
+        setSelectedProduct(results[0]);
       }
     }, 800);
   };
@@ -55,242 +61,284 @@ export default function ScanningView({ onProductScanned }: ScanningViewProps) {
     setIsListening(true);
     setTimeout(() => {
       setIsListening(false);
-      simulateScan();
+      handleDemoSearch();
     }, 1000);
   };
 
-  const handleRealTimeScan = (item: CartItem) => {
-    setLastScannedProduct(item);
-    onProductScanned(item);
-    setShowRealTimeScanner(false);
+  const handleSwap = (alternative: Product) => {
+    setSelectedProduct(alternative);
+    setShowSwapModal(false);
     
-    if (item.co2e > 5) {
-      setShowEcoAlert(true);
-      setTimeout(() => setShowEcoAlert(false), 2500);
-    }
+    // Trigger +50 EcoPoints animation
+    setEcoPointsAnimation(50);
+    setTimeout(() => setEcoPointsAnimation(0), 2000);
     
-    if (item.alternatives && item.alternatives.length > 0 && item.co2e > 3) {
-      setTimeout(() => setShowSwapModal(true), 600);
+    // Add to cart
+    const cartItem: CartItem = {
+      ...alternative,
+      quantity: 1,
+      scannedAt: new Date()
+    };
+    onProductScanned(cartItem);
+  };
+
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      const cartItem: CartItem = {
+        ...selectedProduct,
+        quantity: 1,
+        scannedAt: new Date()
+      };
+      onProductScanned(cartItem);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white pb-6">
-      {/* Simple Scanning Interface */}
-      <div className="relative bg-gradient-to-b from-green-50 to-white p-6 rounded-xl border-2 border-[#00a862] shadow-lg m-4">
+    <div className="max-w-4xl mx-auto bg-white pb-6">
+      {/* 3-Step Demo Header */}
+      <div className="bg-gradient-to-r from-[#0071ce] to-[#00a862] text-white p-6 rounded-xl m-4 mb-6">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-2">🎯 3-Step Demo Flow</h2>
+          <p className="text-blue-100 mb-4">Experience the complete EcoSmart journey</p>
+          
+          <button
+            onClick={handleDemoSearch}
+            className="bg-[#ffc220] text-[#0071ce] px-8 py-3 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all duration-300 button-press hover-lift flex items-center space-x-2 mx-auto"
+          >
+            <Target className="h-5 w-5" />
+            <span>Start Demo: Search "Great Value Beef"</span>
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Search Interface */}
+      <div className="relative bg-gradient-to-b from-blue-50 to-white p-6 rounded-xl border-2 border-[#0071ce] shadow-lg m-4">
         <div className="text-center mb-6">
           <div className="flex items-center justify-center space-x-2 mb-3">
-            <div className="w-8 h-8 bg-[#00a862] rounded-full flex items-center justify-center">
-              <ShoppingCart className="h-5 w-5 text-white" />
+            <div className="w-8 h-8 bg-[#0071ce] rounded-full flex items-center justify-center">
+              <Search className="h-5 w-5 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Quick Scanner</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Product Search</h2>
           </div>
-          <p className="text-gray-600 mb-3">Simple product scanning for quick demos</p>
+          <p className="text-gray-600 mb-3">Search for products to see their environmental impact</p>
         </div>
 
-        {/* Simple Camera Viewfinder */}
-        <div className="relative aspect-square bg-gradient-to-br from-green-100 to-blue-100 rounded-xl mb-6 overflow-hidden border-4 border-[#00a862]">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00a862]/20 via-transparent to-[#0071ce]/20">
-            <div className="flex items-center justify-center h-full">
-              <Camera className="h-20 w-20 text-gray-600" />
-            </div>
+        {/* Search Bar */}
+        <div className="flex space-x-3 mb-6">
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              placeholder="Search products (try 'Great Value Beef')"
+              className="w-full px-4 py-3 border-2 border-[#0071ce] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+            />
+            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
           </div>
           
-          {/* Scanning Animation */}
-          {scanAnimation && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-ping absolute h-32 w-32 bg-[#00a862] rounded-full opacity-20"></div>
-              <div className="animate-pulse absolute h-24 w-24 bg-[#00a862] rounded-full opacity-40"></div>
-              <div className="animate-bounce absolute h-16 w-16 bg-[#00a862] rounded-full opacity-60"></div>
-              <Scan className="h-8 w-8 text-white animate-spin" />
-            </div>
-          )}
-          
-          {/* Scanning Overlay */}
-          <div className="absolute inset-6 border-2 border-white/60 rounded-xl">
-            <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-[#00a862]"></div>
-            <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-[#00a862]"></div>
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[#00a862]"></div>
-            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[#00a862]"></div>
-            
-            {!scanAnimation && (
-              <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute w-full h-0.5 bg-[#00a862] animate-scan-line"></div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="space-y-3">
-          {/* Live Scanner */}
           <button
-            onClick={() => setShowRealTimeScanner(true)}
-            className="w-full py-4 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-[#00a862] to-green-600 hover:from-green-600 hover:to-green-700 transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg"
-          >
-            <div className="flex items-center justify-center space-x-2">
-              <Video className="h-5 w-5" />
-              <span>Open EcoSmart Scanner</span>
-            </div>
-          </button>
-
-          {/* Quick Scan */}
-          <button
-            onClick={simulateScan}
-            disabled={isScanning}
-            className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-200 shadow-lg ${
-              isScanning 
+            onClick={handleSearch}
+            disabled={isSearching || !searchTerm.trim()}
+            className={`px-6 py-3 rounded-lg font-semibold text-white transition-all duration-200 ${
+              isSearching || !searchTerm.trim()
                 ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-gradient-to-r from-[#0071ce] to-blue-600 hover:from-blue-600 hover:to-blue-700 transform hover:scale-105 active:scale-95'
+                : 'bg-[#0071ce] hover:bg-blue-700 transform hover:scale-105'
             }`}
           >
-            {isScanning ? (
-              <div className="flex items-center justify-center space-x-2">
-                <RefreshCw className="h-5 w-5 animate-spin" />
-                <span>Scanning Product...</span>
-              </div>
+            {isSearching ? (
+              <RefreshCw className="h-5 w-5 animate-spin" />
             ) : (
-              <div className="flex items-center justify-center space-x-2">
-                <Scan className="h-5 w-5" />
-                <span>Quick Scan Demo</span>
-              </div>
+              'Search'
             )}
           </button>
-
-          {/* Voice Command */}
+          
           <button
             onClick={handleVoiceCommand}
-            disabled={isListening || isScanning}
-            className={`w-full py-3 px-6 rounded-xl font-medium transition-all duration-200 border-2 ${
+            disabled={isListening}
+            className={`px-4 py-3 rounded-lg font-medium transition-all duration-200 border-2 ${
               isListening 
                 ? 'bg-[#00a862] border-[#00a862] text-white' 
                 : 'bg-white border-[#00a862] text-[#00a862] hover:bg-[#00a862] hover:text-white'
             }`}
           >
-            {isListening ? (
-              <div className="flex items-center justify-center space-x-2">
-                <Mic className="h-4 w-4 animate-pulse" />
-                <span>Listening...</span>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center space-x-2">
-                <Mic className="h-4 w-4" />
-                <span>Voice Scan</span>
-              </div>
-            )}
+            <Mic className={`h-5 w-5 ${isListening ? 'animate-pulse' : ''}`} />
           </button>
         </div>
 
-        {/* Voice Commands */}
-        <div className="mt-4 text-center">
-          <p className="text-sm text-gray-500 mb-1">
-            💬 Say <strong>"Scan this product"</strong> or <strong>"Find eco alternatives"</strong>
-          </p>
-          <p className="text-xs text-gray-400">
-            Voice commands help you shop hands-free
-          </p>
+        {/* Demo Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="bg-white rounded-lg p-4 border-2 border-[#0071ce] border-opacity-20">
+            <div className="text-center">
+              <div className="w-8 h-8 bg-[#0071ce] rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">1</div>
+              <h3 className="font-semibold text-gray-900">Search</h3>
+              <p className="text-sm text-gray-600">Find "Great Value Beef"</p>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg p-4 border-2 border-[#00a862] border-opacity-20">
+            <div className="text-center">
+              <div className="w-8 h-8 bg-[#00a862] rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">2</div>
+              <h3 className="font-semibold text-gray-900">Analyze</h3>
+              <p className="text-sm text-gray-600">See CO₂: 15.2kg | Water: 1,200 gal</p>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg p-4 border-2 border-[#ffc220] border-opacity-50">
+            <div className="text-center">
+              <div className="w-8 h-8 bg-[#ffc220] rounded-full flex items-center justify-center text-[#0071ce] font-bold mx-auto mb-2">3</div>
+              <h3 className="font-semibold text-gray-900">Swap</h3>
+              <p className="text-sm text-gray-600">Try Beyond Meat (90% less CO₂)</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Product Display */}
-      {lastScannedProduct && (
+      {selectedProduct && (
         <div className="mx-4 mb-6">
-          <div className="bg-white rounded-xl border-2 border-[#00a862] p-4 shadow-md animate-slide-up">
-            <div className="flex items-center space-x-4">
-              <img 
-                src={lastScannedProduct.image} 
-                alt={lastScannedProduct.name}
-                className="w-20 h-20 object-cover rounded-lg shadow-sm"
-              />
-              <div className="flex-1">
-                <h3 className="font-semibold text-gray-900 mb-1">{lastScannedProduct.name}</h3>
-                <p className="text-sm text-gray-600 mb-2">{lastScannedProduct.brand}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-bold text-[#0071ce]">${lastScannedProduct.price}</span>
-                  <div className="flex items-center space-x-2">
-                    {lastScannedProduct.isEcoFriendly ? (
-                      <div className="flex items-center space-x-1 text-[#00a862]">
-                        <CheckCircle className="h-4 w-4" />
-                        <span className="text-sm font-medium">Eco-Friendly</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center space-x-1 text-orange-500">
-                        <AlertTriangle className="h-4 w-4" />
-                        <span className="text-sm font-medium">High Impact</span>
-                      </div>
-                    )}
+          <div className="bg-white rounded-xl border-2 border-[#00a862] p-6 shadow-lg animate-slide-up">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Product Info */}
+              <div className="flex items-center space-x-4">
+                <img 
+                  src={selectedProduct.image} 
+                  alt={selectedProduct.name}
+                  className="w-24 h-24 object-cover rounded-lg shadow-sm"
+                />
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{selectedProduct.name}</h3>
+                  <p className="text-gray-600 mb-2">{selectedProduct.brand}</p>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-2xl font-bold text-[#0071ce]">${selectedProduct.price}</span>
+                    <div className="flex items-center space-x-2">
+                      {selectedProduct.isEcoFriendly ? (
+                        <div className="flex items-center space-x-1 text-[#00a862]">
+                          <CheckCircle className="h-5 w-5" />
+                          <span className="font-medium">Eco-Friendly</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center space-x-1 text-red-500">
+                          <AlertTriangle className="h-5 w-5" />
+                          <span className="font-medium">High Impact</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between text-sm">
-                  <span className={`font-semibold ${
-                    lastScannedProduct.co2e > 5 ? 'text-red-600' : 
-                    lastScannedProduct.co2e > 2 ? 'text-yellow-600' : 'text-[#00a862]'
-                  }`}>
-                    {lastScannedProduct.co2e}kg CO₂
-                  </span>
-                  <span className="text-gray-500">
-                    {lastScannedProduct.waterUsage}L water • {lastScannedProduct.recyclabilityPercent}% recyclable
-                  </span>
+              </div>
+
+              {/* Environmental Impact */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 mb-3">Environmental Impact</h4>
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className={`text-2xl font-bold ${
+                      selectedProduct.co2e > 10 ? 'text-red-600' : 
+                      selectedProduct.co2e > 5 ? 'text-orange-500' : 'text-[#00a862]'
+                    }`}>
+                      {selectedProduct.co2e}kg
+                    </div>
+                    <div className="text-sm text-gray-600">CO₂ Impact</div>
+                    {selectedProduct.co2e > 10 && (
+                      <div className="text-xs text-red-500 mt-1">Very High</div>
+                    )}
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-blue-600">
+                      {Math.round(selectedProduct.waterUsage * 0.264)} gal
+                    </div>
+                    <div className="text-sm text-gray-600">Water Usage</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-green-600">{selectedProduct.recyclabilityPercent}%</div>
+                    <div className="text-sm text-gray-600">Recyclable</div>
+                  </div>
                 </div>
               </div>
             </div>
             
             {/* Action Buttons */}
-            <div className="mt-4 flex space-x-2">
-              {lastScannedProduct.alternatives && lastScannedProduct.alternatives.length > 0 && (
+            <div className="mt-6 flex space-x-3">
+              {selectedProduct.alternatives && selectedProduct.alternatives.length > 0 && (
                 <button
                   onClick={() => setShowSwapModal(true)}
-                  className="flex-1 bg-[#00a862] text-white py-2 px-4 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center space-x-1"
+                  className="flex-1 bg-[#00a862] text-white py-3 px-6 rounded-lg text-lg font-bold hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
                 >
-                  <TrendingDown className="h-4 w-4" />
-                  <span>Better Choice Available</span>
+                  <TrendingDown className="h-5 w-5" />
+                  <span>Try Beyond Meat (90% less CO₂)</span>
                 </button>
               )}
-              <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
+              <button 
+                onClick={handleAddToCart}
+                className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+              >
                 Add to Cart
               </button>
             </div>
 
-            {/* EcoPoints Reward */}
-            <div className="mt-3 text-center">
-              <span className="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                <Award className="h-4 w-4 mr-1" />
-                +{lastScannedProduct.isEcoFriendly ? 20 : 10} EcoPoints earned!
-              </span>
-            </div>
+            {/* EcoPoints Animation */}
+            {ecoPointsAnimation > 0 && (
+              <div className="mt-4 text-center">
+                <div className="inline-flex items-center px-6 py-3 bg-[#ffc220] text-[#0071ce] rounded-full text-lg font-bold animate-bounce">
+                  <Zap className="h-6 w-6 mr-2" />
+                  <span>+{ecoPointsAnimation} EcoPoints!</span>
+                  <Award className="h-6 w-6 ml-2" />
+                </div>
+              </div>
+            )}
+
+            {/* Regular EcoPoints Reward */}
+            {ecoPointsAnimation === 0 && (
+              <div className="mt-4 text-center">
+                <span className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full font-medium">
+                  <Award className="h-4 w-4 mr-1" />
+                  +{selectedProduct.isEcoFriendly ? 20 : 10} EcoPoints earned!
+                </span>
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {/* Modals */}
-      {showRealTimeScanner && (
-        <RealTimeCameraScanner
-          onProductScanned={handleRealTimeScan}
-          onClose={() => setShowRealTimeScanner(false)}
-        />
-      )}
+      {/* Top Swapped Products */}
+      <div className="mx-4 mb-6">
+        <div className="bg-gradient-to-r from-[#0071ce] to-[#00a862] rounded-xl p-6 text-white">
+          <h3 className="text-xl font-bold mb-4 text-[#ffc220]">🔥 Top Swapped Products</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white bg-opacity-20 rounded-lg p-4">
+              <div className="text-2xl font-bold text-[#ffc220]">12,000</div>
+              <div className="text-sm text-blue-100">Beyond Meat swaps</div>
+              <div className="text-xs text-green-300 mt-1">↑ 340% this month</div>
+            </div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-4">
+              <div className="text-2xl font-bold text-[#ffc220]">8,500</div>
+              <div className="text-sm text-blue-100">Oat milk swaps</div>
+              <div className="text-xs text-green-300 mt-1">↑ 220% this month</div>
+            </div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-4">
+              <div className="text-2xl font-bold text-[#ffc220]">6,200</div>
+              <div className="text-sm text-blue-100">Eco detergent swaps</div>
+              <div className="text-xs text-green-300 mt-1">↑ 180% this month</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      {showEcoAlert && lastScannedProduct && (
+      {/* Modals */}
+      {showEcoAlert && selectedProduct && (
         <EcoAlert
-          product={lastScannedProduct}
+          product={selectedProduct}
           onClose={() => setShowEcoAlert(false)}
         />
       )}
 
-      {showSwapModal && lastScannedProduct && lastScannedProduct.alternatives && (
+      {showSwapModal && selectedProduct && selectedProduct.alternatives && (
         <SwapModal
-          originalProduct={lastScannedProduct}
-          alternatives={lastScannedProduct.alternatives}
-          onSwap={(alternative) => {
-            const cartItem: CartItem = {
-              ...alternative,
-              quantity: 1,
-              scannedAt: new Date()
-            };
-            onProductScanned(cartItem);
-            setShowSwapModal(false);
-            setLastScannedProduct(alternative);
-          }}
+          originalProduct={selectedProduct}
+          alternatives={selectedProduct.alternatives}
+          onSwap={handleSwap}
           onClose={() => setShowSwapModal(false)}
         />
       )}
