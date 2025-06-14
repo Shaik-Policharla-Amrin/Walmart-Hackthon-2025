@@ -92,40 +92,6 @@ EcoSmart Scanner is an AI-powered sustainability platform that helps Walmart ach
 - **Native Walmart Ecosystem** integration
 - **Proven ROI Model** with measurable outcomes
 
-### 🏆 Awards & Recognition
-
-#### Walmart Sparkathon 2025
-- **🥇 Grand Prize Winner**
-- **🌱 Sustainability Innovation Award**
-- **💡 Best AI Implementation**
-- **🎯 Judge's Choice Award**
-
-#### Official Endorsements
-- **Walmart Sustainability Innovation Lab** - Official Partnership
-- **Kathleen McLaughlin, SVP Sustainability** - Pilot Program Approved
-- **Q1 2025 Pilot**: 10 stores, $2.5M investment allocated
-
-### 🚀 Implementation Roadmap
-
-#### Q1 2025: Pilot Phase
-- **10 Stores**: 5 urban, 5 suburban locations
-- **3 Product Categories**: Initial focus areas
-- **Success Metrics**: 10% emission reduction, 60% adoption
-
-#### Q2 2025: Regional Rollout
-- **100 Stores**: Full produce section coverage
-- **Enhanced Features**: Voice commands, advanced AI
-- **Supplier Onboarding**: Top 50 suppliers integrated
-
-#### Q3 2025: National Expansion
-- **1,000+ Stores**: All perishables categories
-- **Full Integration**: Complete Walmart+ connectivity
-- **Advanced Analytics**: Predictive sustainability insights
-
-#### Q4 2025: Complete Deployment
-- **All US Stores**: Full system implementation
-- **International Expansion**: Canada and Mexico pilots
-- **Platform Maturity**: Self-optimizing AI algorithms
 
 ### 🔗 Links & Resources
 
@@ -139,25 +105,8 @@ EcoSmart Scanner is an AI-powered sustainability platform that helps Walmart ach
 - **Judge Mode Walkthrough**: Interactive 7-day simulation
 - **Technical Deep Dive**: Architecture and integration details
 
-### 👥 Team
-
-#### Core Development Team
-- **Lead Developer**: Full-stack React/TypeScript specialist
-- **AI/ML Engineer**: Real-time recommendation algorithms
-- **UX/UI Designer**: Mobile-first, accessibility-focused design
-- **Sustainability Consultant**: Walmart Gigaton PPA expertise
-
-#### Advisors
-- **Walmart Innovation Lab**: Technical guidance and integration support
-- **Sustainability Experts**: Environmental impact validation
-- **Retail Technology Leaders**: Scalability and performance optimization
-
 ### 📞 Contact
 
-#### Business Inquiries
-- **Email**: team@ecosmart-scanner.com
-- **Phone**: +1 (479) 555-SCAN
-- **LinkedIn**: [EcoSmart Scanner Team](https://linkedin.com/company/ecosmart-scanner)
 
 #### Technical Support
 - **Documentation**: [docs.ecosmart-scanner.com](https://docs.ecosmart-scanner.com)
