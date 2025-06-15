@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Target, Leaf, Award, Mic, MicOff, Zap } from 'lucide-react';
+import { ShoppingCart, Target, Leaf, Award, Mic, MicOff, Zap, User, LogIn } from 'lucide-react';
 import { EcoMetrics } from '../types/product';
-import { User } from '../types/user';
+import { User as UserType } from '../types/user';
 import { getCO2Color, getCO2Background, formatCO2Comparison } from '../utils/carbonCalculations';
 
 interface HeaderProps {
   metrics: EcoMetrics;
-  user: User;
+  user: UserType;
   onCartClick: () => void;
   onRewardsClick: () => void;
+  onAuthClick?: () => void;
+  onProfileClick?: () => void;
+  isAuthenticated?: boolean;
 }
 
-export default function Header({ metrics, user, onCartClick, onRewardsClick }: HeaderProps) {
+export default function Header({ 
+  metrics, 
+  user, 
+  onCartClick, 
+  onRewardsClick, 
+  onAuthClick, 
+  onProfileClick,
+  isAuthenticated = false 
+}: HeaderProps) {
   const [isVoiceEnabled, setIsVoiceEnabled] = useState(user.preferences.voiceEnabled);
   const [showTooltip, setShowTooltip] = useState(false);
   
@@ -36,9 +47,9 @@ export default function Header({ metrics, user, onCartClick, onRewardsClick }: H
               <div>
                 <h1 className="text-xl font-bold">Walmart Gigaton PPA</h1>
                 <div className="flex items-center space-x-2">
-                  <p className="text-xs text-blue-200">Scope 3 Tracker</p>
+                  <p className="text-xs text-blue-200">EcoSmart Scanner</p>
                   <span className="bg-[#00a862] px-2 py-0.5 rounded-full text-xs font-semibold">
-                    Empowering Suppliers for Net-Zero 2040
+                    AI-Powered Sustainability
                   </span>
                 </div>
               </div>
@@ -126,6 +137,25 @@ export default function Header({ metrics, user, onCartClick, onRewardsClick }: H
                 </span>
               )}
             </button>
+
+            {/* Auth/Profile Button */}
+            {isAuthenticated ? (
+              <button
+                onClick={onProfileClick}
+                className="flex items-center space-x-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all duration-200"
+              >
+                <User className="h-5 w-5" />
+                <span className="text-sm font-medium">{user.name.split(' ')[0]}</span>
+              </button>
+            ) : (
+              <button
+                onClick={onAuthClick}
+                className="flex items-center space-x-2 bg-[#ffc220] text-[#0071ce] px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition-all duration-200"
+              >
+                <LogIn className="h-4 w-4" />
+                <span>Sign In</span>
+              </button>
+            )}
           </div>
         </div>
 

@@ -15,7 +15,9 @@
     "react-dom": "^18.3.1",
     "@zxing/library": "^0.20.0",
     "react-webcam": "^7.2.0",
-    "quagga": "^0.12.1"
+    "quagga": "^0.12.1",
+    "@supabase/supabase-js": "^2.39.0",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

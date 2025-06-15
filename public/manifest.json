@@ -1,0 +1,65 @@
+{
+  "name": "EcoSmart Scanner - Walmart Sustainability",
+  "short_name": "EcoSmart",
+  "description": "AI-powered sustainability scanner for Walmart shoppers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0071ce",
+  "theme_color": "#0071ce",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "lifestyle", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan Product",
+      "short_name": "Scan",
+      "description": "Quickly scan a product barcode",
+      "url": "/?action=scan",
+      "icons": [
+        {
+          "src": "/icon-scan.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Rewards",
+      "short_name": "Rewards",
+      "description": "Check your EcoPoints and rewards",
+      "url": "/?action=rewards",
+      "icons": [
+        {
+          "src": "/icon-rewards.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
