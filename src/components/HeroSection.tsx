@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, TrendingDown, ArrowRight, Play, Sparkles, Target, ShoppingCart, Factory, Award, DollarSign } from 'lucide-react';
-import { Play } from "lucide-react"; 
 
 interface HeroSectionProps {
   isSupplierView?: boolean;
