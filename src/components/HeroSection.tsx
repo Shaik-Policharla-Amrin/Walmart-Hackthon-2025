@@ -363,9 +363,7 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
           </div>
           );
           }
-        {/* Walmart Impact Banner */}
-        <div className="mt-16 text-center bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8">
-          <div className="text-lg text-blue-200 mb-2">Your contribution to Walmart's mission:</div>
-          <h3 className="text-4xl font-bold text-[#ffc220] mb-2">1 Billion Tons CO₂ by 2030</h3>
-          <div className="text-sm text-blue-300">Every swap brings us closer to the goal</div>
-        </div>
+       <>
+
+         v>
+</>
