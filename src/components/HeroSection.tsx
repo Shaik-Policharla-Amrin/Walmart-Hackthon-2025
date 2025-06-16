@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, TrendingDown, ArrowRight, Play, Sparkles, Target, ShoppingCart, Factory, Award, DollarSign } from 'lucide-react';
+import { Play } from "lucide-react"; 
 
 interface HeroSectionProps {
   isSupplierView?: boolean;
@@ -326,7 +327,7 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
 
           {/* Demo Video */}
           <div className="relative">
-            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border- 
               white border-opacity-20 hover-lift">
               <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative">
                 <iframe
@@ -336,15 +337,17 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
                   className="w-full h-full"
                   title="Walmart EcoSmart Demo"
                   />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0071ce]/20 to-[#00a862]/20 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0071ce]/20 to-[#00a862]/20 
+                  flex items-center justify-center">
                   <div className="text-center text-white">
                     <Play className="h-16 w-16 mx-auto mb-4 animate-pulse" />
-                    <h3 className="text-xl font-bold mb-2">15-Second Demo</h3>
+                    <h3 className="text-xl font-bold mb-2">15-Second Demo</h3>   
                     <p className="text-sm opacity-90">See how customers save money & planet</p>
                   </div>
                 </div>
               </div>
-              <div className="mt-4 text-center">
+              {/* Demo Stats */}
+              <div className="mt-4 text-center">        
                 <div className="text-sm text-blue-200 mb-2">Live Demo Stats</div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white bg-opacity-10 rounded-lg p-3">
@@ -359,8 +362,8 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
               </div>
             </div>
           </div>
-        </div>
-
+          );
+          }
         {/* Walmart Impact Banner */}
         <div className="mt-16 text-center bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8">
           <div className="text-lg text-blue-200 mb-2">Your contribution to Walmart's mission:</div>
