@@ -323,7 +323,7 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
             <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-20 hover-lift">
               <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative">
                 <iframe
-                  src="https://www.loom.com/embed/placeholder"
+                  src="https://drive.google.com/file/d/11hf80krCuOl0iOIRSWPsJ1alPVkGcage/preview"
                   frameBorder="0"
                   allowFullScreen
                   className="w-full h-full"
