@@ -370,6 +370,5 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
           <div className="text-sm text-blue-300">Every swap brings us closer to the goal</div>
         </div>
       </div>
-    </div>
   );
 }
