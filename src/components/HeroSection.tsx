@@ -369,6 +369,5 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
           <h3 className="text-4xl font-bold text-[#ffc220] mb-2">1 Billion Tons CO₂ by 2030</h3>
           <div className="text-sm text-blue-300">Every swap brings us closer to the goal</div>
         </div>
-      </div>
   );
 }
