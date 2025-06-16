@@ -325,8 +325,6 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
           </div>
 
           {/* Demo Video */}
-          export default function DemoSection() {
-            return (
           <div className="relative">
             <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border- 
               white border-opacity-20 hover-lift">
