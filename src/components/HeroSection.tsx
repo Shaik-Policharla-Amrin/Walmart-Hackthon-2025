@@ -219,7 +219,7 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
             <ShoppingCart className="h-4 w-4" />
             <span>🛒 OFFICIALLY ENDORSED BY WALMART'S SUSTAINABILITY INNOVATION LAB</span>
             <span>•</span>
-            <span>SPARKATHON 2025 WINNER</span>
+            <span>SPARKATHON 2025 </span>
             <ShoppingCart className="h-4 w-4" />
           </div>
         </div>
