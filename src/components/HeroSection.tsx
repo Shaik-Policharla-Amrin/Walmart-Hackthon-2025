@@ -310,11 +310,16 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
                 <span>Start 3-Step Demo</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              
-              <button className="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-[#0071ce] transition-all duration-300 button-press hover-lift flex items-center justify-center space-x-2">
-                <Sparkles className="h-5 w-5" />
-                <span>View GitHub</span>
-              </button>
+             <a
+  href="https://github.com/Shaik-Policharla-Amrin/Walmart-Hackthon-2025"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-[#0071ce] transition-all duration-300 button-press hover-lift flex items-center justify-center space-x-2"
+>
+  <Sparkles className="h-5 w-5" />
+  <span>View GitHub</span>
+</a>
+
             </div>
           </div>
 
