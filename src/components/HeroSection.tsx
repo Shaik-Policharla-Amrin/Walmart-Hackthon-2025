@@ -324,28 +324,26 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
             </div>
           </div>
 
-         {/* Demo Video */}
-<div className="relative">
-  <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-20 hover-lift">
-    <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative">
-      <iframe
-        src="https://drive.google.com/file/d/11hf80krCuOl0iOIRSWPsJ1alPVkGcage/preview"
-        frameBorder="0"
-        allowFullScreen
-        className="w-full h-full"
-        title="Walmart EcoSmart Demo"
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0071ce]/20 to-[#00a862]/20 flex items-center justify-center">
-        <div className="text-center text-white">
-          <Play className="h-16 w-16 mx-auto mb-4 animate-pulse" />
-          <h3 className="text-xl font-bold mb-2">15-Second Demo</h3>
-          <p className="text-sm opacity-90">See how customers save money & planet</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+          {/* Demo Video */}
+          <div className="relative">
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-
+              white border-opacity-20 hover-lift">
+              <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative">
+                <iframe
+                  src="https://drive.google.com/file/d/11hf80krCuOl0iOIRSWPsJ1alPVkGcage/preview"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="w-full h-full"
+                  title="Walmart EcoSmart Demo"
+                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0071ce]/20 to-[#00a862]/20 flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <Play className="h-16 w-16 mx-auto mb-4 animate-pulse" />
+                    <h3 className="text-xl font-bold mb-2">15-Second Demo</h3>
+                    <p className="text-sm opacity-90">See how customers save money & planet</p>
+                  </div>
+                </div>
+              </div>
               <div className="mt-4 text-center">
                 <div className="text-sm text-blue-200 mb-2">Live Demo Stats</div>
                 <div className="grid grid-cols-2 gap-4">
