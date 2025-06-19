@@ -360,6 +360,5 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
           </div>
         </div>
       </div>
-    </div>
   );
 };
