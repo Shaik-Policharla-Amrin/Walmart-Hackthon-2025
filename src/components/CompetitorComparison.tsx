@@ -69,24 +69,28 @@ export default function CompetitorComparison() {
         </div>
 
         <div className="p-6">
+         {/* Key Differentiators */}
           {/* Key Differentiators */}
-          <div className="mb-8 bg-gradient-to-r from-[#00a862] to-green-600 rounded-xl p-6 text-white">
-            <h3 className="text-xl font-bold mb-4 text-[#ffc220]">🚀 Why We Win</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">5x</div>
-                <div className="text-sm text-green-100">Better waste reduction than competitors</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">73%</div>
-                <div className="text-sm text-green-100">Customer adoption rate (industry avg: 25%)</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">8x</div>
-                <div className="text-sm text-green-100">Faster integration than alternatives</div>
-              </div>
-            </div>
-          </div>
+<div className="mb-8 bg-gradient-to-r from-[#00a862] to-green-600 rounded-xl p-6 text-white">
+  <h3 className="text-xl font-bold mb-4 text-[#ffc220]">🚀 Why We Win</h3>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="text-center">
+      <div className="text-4xl font-bold mb-2 text-white">5x</div>
+      <div className="text-sm text-white">Better waste reduction than competitors</div>
+    </div>
+    <div className="text-center">
+      <div className="text-4xl font-bold mb-2 text-white">73%</div>
+      <div className="text-sm text-white">Customer adoption rate (industry avg: 25%)</div>
+    </div>
+    <div className="text-center">
+      <div className="text-4xl font-bold mb-2 text-white">8x</div>
+      <div className="text-sm text-white">Faster integration than alternatives</div>
+    </div>
+  </div>
+</div>
+
+ 
+
 
           {/* Comparison Table */}
           <div className="overflow-x-auto">
