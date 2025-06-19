@@ -174,8 +174,7 @@ export default function CompetitorComparison() {
                     <div key={idx} className={`text-sm px-2 py-1 rounded-full inline-block mr-1 mb-1 ${
                       competitor.isOurs 
                       ? 'bg-[#00a862] text-white' 
-                      : 'bg-gray-200 text-green-600'  // Changed text color to green-600 for
-                      competitors
+                      : 'bg-gray-200 text-green-600'  // Changed text color to green-600 for competitors
                       }`}>
                       {feature}
                     </div>
