@@ -324,39 +324,41 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
             </div>
           </div>
 
-           <div className="relative py-10 px-4">
-      <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border-white border-opacity-20 hover-lift">
-        <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative">
-          <iframe
-            src="https://drive.google.com/file/d/11hf80krCuOl0iOIRSWPsJ1alPVkGcage/preview"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            className="w-full h-full z-0"
-            title="Walmart EcoSmart Demo"
-          />
-          {/* Optional overlay — you can comment this out to test */} 
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0071ce]/20 to-[#00a862]/20 flex items-center justify-center z-10 pointer-events-none">
-            <div className="text-center text-white">
-              <Play className="h-16 w-16 mx-auto mb-4 animate-pulse" />
-              <h3 className="text-xl font-bold mb-2">15-Second Demo</h3>
-              <p className="text-sm opacity-90">See how customers save money & planet</p>
-            </div>
-          </div>
-          zzz
-        </div>
-
-        {/* Demo Stats */}
-        <div className="mt-4 text-center">
-          <div className="text-sm text-blue-200 mb-2">Live Demo Stats</div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white bg-opacity-10 rounded-lg p-3">
-              <div className="text-2xl font-bold text-[#ffc220]">12,000</div>
-              <div className="text-xs text-blue-200">Beyond Meat Swaps</div>
-            </div>
-            <div className="bg-white bg-opacity-10 rounded-lg p-3">
-              <div className="text-2xl font-bold text-green-400">90%</div>
-              <div className="text-xs text-blue-200">CO₂ Reduction</div>
+          {/* Demo Video */}
+          <div className="relative">
+            <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-6 border border- 
+              white border-opacity-20 hover-lift">
+              <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative">
+                <iframe
+                  src="https://drive.google.com/file/d/11hf80krCuOl0iOIRSWPsJ1alPVkGcage/preview"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="w-full h-full"
+                  title="Walmart EcoSmart Demo"
+                  />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0071ce]/20 to-[#00a862]/20 
+                  flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <Play className="h-16 w-16 mx-auto mb-4 animate-pulse" />
+                    <h3 className="text-xl font-bold mb-2">15-Second Demo</h3>   
+                    <p className="text-sm opacity-90">See how customers save money & planet</p>
+                  </div>
+                </div>
+              </div>
+              {/* Demo Stats */}
+              <div className="mt-4 text-center">        
+                <div className="text-sm text-blue-200 mb-2">Live Demo Stats</div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-white bg-opacity-10 rounded-lg p-3">
+                    <div className="text-2xl font-bold text-[#ffc220]">12,000</div>
+                    <div className="text-xs text-blue-200">Beyond Meat Swaps</div>
+                  </div>
+                  <div className="bg-white bg-opacity-10 rounded-lg p-3">
+                    <div className="text-2xl font-bold text-green-400">90%</div>
+                    <div className="text-xs text-blue-200">CO₂ Reduction</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
