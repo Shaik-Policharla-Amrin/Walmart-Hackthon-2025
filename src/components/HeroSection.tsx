@@ -364,6 +364,4 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
           );
           }
        <>
-
-         v>
 </>
