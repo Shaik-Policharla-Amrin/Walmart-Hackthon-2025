@@ -79,7 +79,7 @@ export default function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthM
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-black"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-black text-black"
                   placeholder="Enter your name"
                   required
                 />
