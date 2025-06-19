@@ -79,7 +79,7 @@ export default function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthM
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-black"
                   placeholder="Enter your name"
                   required
                 />
@@ -97,7 +97,7 @@ export default function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthM
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-black"
                 placeholder="Enter your email"
                 required
               />
@@ -114,7 +114,7 @@ export default function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthM
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0071ce] focus:border-black"
                 placeholder="Enter your password"
                 required
                 minLength={6}
