@@ -69,28 +69,24 @@ export default function CompetitorComparison() {
         </div>
 
         <div className="p-6">
-         {/* Key Differentiators */}
           {/* Key Differentiators */}
-<div className="mb-8 bg-gradient-to-r from-[#00a862] to-green-600 rounded-xl p-6 text-white">
-  <h3 className="text-xl font-bold mb-4 text-[#ffc220]">🚀 Why We Win</h3>
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div className="text-center">
-      <div className="text-4xl font-bold mb-2 text-white">5x</div>
-      <div className="text-sm text-white">Better waste reduction than competitors</div>
-    </div>
-    <div className="text-center">
-      <div className="text-4xl font-bold mb-2 text-white">73%</div>
-      <div className="text-sm text-white">Customer adoption rate (industry avg: 25%)</div>
-    </div>
-    <div className="text-center">
-      <div className="text-4xl font-bold mb-2 text-white">8x</div>
-      <div className="text-sm text-white">Faster integration than alternatives</div>
-    </div>
-  </div>
-</div>
-
- 
-
+          <div className="mb-8 bg-gradient-to-r from-[#00a862] to-green-600 rounded-xl p-6 text-white">
+            <h3 className="text-xl font-bold mb-4 text-[#ffc220]">🚀 Why We Win</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2">5x</div>
+                <div className="text-sm text-green-100">Better waste reduction than competitors</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2">73%</div>
+                <div className="text-sm text-green-100">Customer adoption rate (industry avg: 25%)</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-2">8x</div>
+                <div className="text-sm text-green-100">Faster integration than alternatives</div>
+              </div>
+            </div>
+          </div>
 
           {/* Comparison Table */}
           <div className="overflow-x-auto">
@@ -172,19 +168,19 @@ export default function CompetitorComparison() {
                         {!competitor.isOurs && getComparisonIcon(1/competitor.integrationTime, 1/ourSolution.integrationTime)}
                       </div>
                     </td>
-                    
                     <td className="p-4 border-b">
-                      <div className="space-y-1">
-                        {competitor.features.map((feature, idx) => (
-                          <div key={idx} className={`text-sm px-2 py-1 rounded-full inline-block mr-1 mb-1 ${
-                            competitor.isOurs 
-                              ? 'bg-[#00a862] text-white' 
-                              : 'bg-gray-200 text-gray-600'
-                          }`}>
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
+                     <div className="space-y-1">
+                       {competitor.features.map((feature, idx) => (
+                    <div key={idx} className={`text-sm px-2 py-1 rounded-full inline-block mr-1 mb-1 ${
+                      competitor.isOurs 
+                      ? 'bg-[#00a862] text-white' 
+                      : 'bg-gray-200 text-green-600'  // Changed text color to green-600 for
+                      competitors
+                      }`}>
+                      {feature}
+                    </div>
+                  ))}
+                     </div>
                     </td>
                   </tr>
                 ))}
