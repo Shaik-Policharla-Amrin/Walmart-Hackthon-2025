@@ -58,7 +58,7 @@ export default function CompetitorComparison() {
     <div className="max-w-7xl mx-auto p-6">
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#0071ce] to-[#00a862] text-white p-6">
+        <div className="bg-gradient-to-r from-[#0071ce] to-[#00a862] text-green p-6">
           <div className="flex items-center space-x-3">
             <Target className="h-8 w-8 text-[#ffc220]" />
             <div>
