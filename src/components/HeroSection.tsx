@@ -343,6 +343,7 @@ export default function HeroSection({ isSupplierView = false }: HeroSectionProps
               <p className="text-sm opacity-90">See how customers save money & planet</p>
             </div>
           </div>
+          zzz
         </div>
 
         {/* Demo Stats */}
